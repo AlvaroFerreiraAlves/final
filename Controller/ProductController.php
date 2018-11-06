@@ -6,6 +6,47 @@
  * Time: 13:45
  */
 require_once ('../Model/Product.php');
+
+
+if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['method'])) {
+    $method = $_GET['method'];
+    if(method_exists('ProductController', $method)) {
+        $product = new ProductController();
+        $product->$method($_GET);
+    } else {
+        echo 'Metodo incorreto';
+    }
+}
+
+class ProductController{
+
+    public function index(){
+        $products = new Product();
+        $products = $products->all();
+
+        echo json_encode($products);
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 if(isset($_POST['method']) && $_POST['method'] == 'store'){
     $msgError = "";
 
@@ -35,8 +76,8 @@ if(isset($_POST['method']) && $_POST['method'] == 'store'){
         $product = $product->findLast();
         echo json_encode([$product]);
     }
-}
-
+}*/
+/*
 if(isset($_POST['method']) && $_POST['method'] == 'update'){
     $msgError = "";
 
@@ -63,4 +104,4 @@ if(isset($_POST['method']) && $_POST['method'] == 'update'){
         $product->setPrice($_POST['price']);
         $product->update($_POST['id']);
     }
-}
+}*/

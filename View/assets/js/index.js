@@ -1,3 +1,24 @@
+$(document).ready(function() {
+
+
+    $.ajax({
+        url: 'http://localhost/final/Controller/ProductController.php?method=index',
+        dataType: 'json'
+    }).done(function (data) {
+
+        var i;
+        for (i = 0; i < data.length; i++) {
+            products = "<tr><td>"+data[i].id+"</td><td>"+data[i].name+"</td><td>"+data[i].description+"</td><td>"+data[i].price+"</td>";
+            products += "<td><a href='' class='btn btn-primary'>Editar </a> ";
+            products += "<a href='' class='btn btn-danger'>Excluir</a></td></tr>";
+            $('#product-list').append(products);
+        }
+
+
+
+    });
+});
+
 function saveProduct(){
     var data = $('#form-product').serialize();
 
@@ -51,3 +72,4 @@ function updateProduct() {
         }
     })
 }
+
