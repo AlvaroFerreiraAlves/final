@@ -45,8 +45,8 @@
     <div class="alert alert-danger display-error" style="display: none"></div>
     <div class="alert alert-success display-success" style="display: none"></div>
 
-    <form class="form-horizontal" id="form-product" action="../../Controller/ProductController.php">
-        <fieldset>
+    <form class="form-horizontal" id="form-product" method="post" action="../../Controller/ProductController.php">
+        <fieldset id="field">
 
             <!-- Form Name -->
             <legend>Cadastrar produto</legend>
@@ -79,12 +79,12 @@
                 </div>
             </div>
 
-            <input type="hidden" name="method" value="store">
+            <input id="method" name="method" type="hidden" value="store">
 
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="save"></label>
-                <div class="col-md-4">
+                <div id="btn-salvar" class="col-md-4">
                     <button type="button" id="save" name="save" class="btn btn-primary" onclick="saveProduct()">Salvar
                     </button>
                 </div>
