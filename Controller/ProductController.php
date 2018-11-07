@@ -103,6 +103,12 @@ class ProductController{
         }
     }
 
+    public function destroy(){
+        $id = $_GET['id'];
+        $product = new Product();
+        $product->delete($id);
+    }
+
 }
 
 

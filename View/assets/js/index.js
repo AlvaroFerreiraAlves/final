@@ -1,14 +1,14 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:81/final/Controller/ProductController.php?method=index',
+        url: 'http://localhost/final/Controller/ProductController.php?method=index',
         dataType: 'json'
     }).done(function (data) {
 
         var i;
         for (i = 0; i < data.length; i++) {
-            products = "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].price + "</td>";
+            products = "<tr id='product"+data[i].id+"'><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].description + "</td><td>" + data[i].price + "</td>";
             products += "<td><a href='../../../../final/View/product/create-update.html?id=" + data[i].id + "' class='btn btn-primary'>Editar </a> ";
-            products += "<a href='http://localhost:81/final/Controller/ProductController.php?method=destroy&id=" + data[i].id + "' class='btn btn-danger'>Excluir</a></td></tr>";
+            products += '<button id="'+data[i].id+'" class="btn btn-danger" type="button" onclick="destroy(this.id)" value="'+data[i].id+'">Excluir</button></tr>';
             $('#product-list').append(products);
 
         }
@@ -28,7 +28,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        url: 'http://localhost:81/final/Controller/ProductController.php?method=show&id=' + data.id,
+        url: 'http://localhost/final/Controller/ProductController.php?method=show&id=' + data.id,
         dataType: 'json'
     }).done(function (data) {
         $('#name').val(data.name);
@@ -65,9 +65,10 @@ function saveProduct() {
 
         else {
             console.log(data);
-            $('.display-success').html('<ul><li>Produto Cadastrado</li></ul>');
+            $('.display-success').html('<ul><li>Produto Cadastrado!</li></ul>');
             $('.display-success').css('display', 'block');
             $('.display-error').hide();
+            $('#form-product').trigger('reset');
         }
     })
 }
@@ -89,11 +90,23 @@ function updateProduct() {
 
         else {
             console.log(data);
-            $('.display-success').html('<ul><li>Produto Atualizado</li></ul>');
+            $('.display-success').html('<ul><li>Produto Atualizado!</li></ul>');
             $('.display-success').css('display', 'block');
             $('.display-error').hide();
         }
     })
 }
+
+function destroy(id){
+    $.ajax({
+        url: 'http://localhost/final/Controller/ProductController.php?method=destroy&id='+id,
+        dataType: 'json'
+    }).done(function () {
+
+    });
+
+    $('#product'+id).remove();
+}
+
 
 

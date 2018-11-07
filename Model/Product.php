@@ -89,5 +89,14 @@ class Product
         return $stm->fetch();
    }
 
+    public function delete($id){
+        $db = Connection::connectsDb();
+        $sql = "delete from products where id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
 
 }

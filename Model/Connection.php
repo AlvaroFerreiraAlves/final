@@ -13,7 +13,7 @@ class Connection
     public static function connectsDb(){
         if(!isset(self::$instance)){
             try{
-                self::$instance = new PDO('mysql:host=localhost; dbname=teste','root','');
+                self::$instance = new PDO('mysql:host=localhost; dbname=teste','root','password');
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }catch (PDOException  $e){
                 echo 'Erro'. $e->getMessage();
